@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Nadeem Fruit Paradise – Fresh Fruits Kolkata</title>
+<meta name="description" content="Order fresh fruits online from Nadeem Fruit Paradise, Kolkata. Fast delivery, premium quality."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --mango:#FF8C00;--grove:#2D6A1F;--lime:#7DC83A;--cream:#FFF8EE;
+  --bark:#1A0A00;--blush:#FFE8C8;--white:#fff;--red:#e53e3e;
+  --shadow:rgba(26,10,0,0.13);--green:#25D366;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--bark);overflow-x:hidden}
+button{cursor:pointer;font-family:inherit}
+input,select,textarea{font-family:inherit}
+a{text-decoration:none}
+
+/* ── PAGES ── */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 5vw;
+  background:rgba(255,248,238,0.93);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,140,0,0.15);
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--grove)}
+.nav-logo span{color:var(--mango)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-btn{background:none;border:none;font-size:0.88rem;font-weight:600;color:var(--bark);padding:7px 14px;border-radius:50px;transition:.2s}
+.nav-btn:hover{background:var(--blush)}
+.nav-btn.primary{background:var(--mango);color:#fff}
+.nav-btn.primary:hover{background:var(--grove)}
+.cart-btn{position:relative;background:var(--mango);color:#fff;border:none;padding:8px 18px;border-radius:50px;font-size:0.88rem;font-weight:700;display:flex;align-items:center;gap:6px}
+.cart-count{background:#fff;color:var(--mango);border-radius:50%;width:18px;height:18px;font-size:0.7rem;font-weight:900;display:flex;align-items:center;justify-content:center}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;top:80px;right:20px;z-index:9999;
+  background:var(--grove);color:#fff;
+  padding:12px 22px;border-radius:12px;
+  font-size:0.9rem;font-weight:600;
+  box-shadow:0 8px 30px rgba(0,0,0,0.2);
+  opacity:0;transform:translateY(-10px);
+  transition:all .3s;pointer-events:none;
+}
+#toast.show{opacity:1;transform:translateY(0)}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#1A4D0A 0%,#2D6A1F 45%,#FF8C00 100%);
+  padding-top:70px;
+}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.3;animation:blobFloat 8s ease-in-out infinite alternate}
+.hero-blob:nth-child(1){width:500px;height:500px;background:#FF8C00;top:-100px;right:-80px}
+.hero-blob:nth-child(2){width:350px;height:350px;background:#7DC83A;bottom:-80px;left:-60px;animation-delay:2s}
+.hero-blob:nth-child(3){width:250px;height:250px;background:#FFD700;top:50%;left:30%;animation-delay:4s}
+@keyframes blobFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-40px) scale(1.1)}}
+.floaters{position:absolute;inset:0;pointer-events:none}
+.floater{position:absolute;font-size:clamp(1.8rem,3vw,3rem);animation:fruitFloat linear infinite;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))}
+@keyframes fruitFloat{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.9}90%{opacity:.9}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+.hero-content{position:relative;z-index:5;text-align:center;padding:20px}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:50px;margin-bottom:20px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,8vw,6.5rem);font-weight:900;color:#fff;line-height:1;letter-spacing:-2px;text-shadow:0 4px 30px rgba(0,0,0,.3)}
+.hero-title em{font-style:normal;color:var(--mango);display:block}
+.hero-sub{margin-top:16px;font-size:clamp(.95rem,2vw,1.2rem);color:rgba(255,255,255,.85);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.6}
+.hero-actions{margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--mango);color:#fff;padding:13px 32px;border-radius:50px;font-size:1rem;font-weight:700;border:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 32px rgba(255,140,0,.4);transition:.2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,140,0,.6)}
+.btn-outline{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.5);color:#fff;padding:11px 28px;border-radius:50px;font-size:1rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-outline:hover{background:rgba(255,255,255,.25);transform:translateY(-2px)}
+.hero-stats{margin-top:48px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--mango)}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.7);letter-spacing:1px;text-transform:uppercase}
+
+/* ── MARQUEE ── */
+.marquee-strip{background:var(--mango);overflow:hidden;padding:13px 0;white-space:nowrap}
+.marquee-inner{display:inline-block;animation:marquee 22s linear infinite}
+.marquee-inner span{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:#fff;margin:0 28px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SHOP SECTION ── */
+#shop-section{padding:80px 5vw;background:var(--white)}
+.section-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--mango);margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--bark);line-height:1.15}
+.section-title span{color:var(--grove)}
+.shop-intro{max-width:520px;margin-bottom:48px}
+.shop-intro p{margin-top:12px;color:#666;line-height:1.7}
+
+/* Filter tabs */
+.filter-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.filter-tab{background:var(--blush);border:none;color:var(--bark);padding:8px 20px;border-radius:50px;font-size:.85rem;font-weight:600;transition:.2s}
+.filter-tab.active,.filter-tab:hover{background:var(--mango);color:#fff}
+
+/* Fruit grid */
+.fruit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}
+.fruit-card{border-radius:20px;overflow:hidden;background:var(--cream);box-shadow:0 4px 20px var(--shadow);transition:.3s}
+.fruit-card:hover{transform:translateY(-6px);box-shadow:0 14px 36px var(--shadow)}
+.fruit-emoji-box{height:130px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative}
+.fruit-badge-tag{position:absolute;top:10px;right:10px;background:var(--mango);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:1px;padding:3px 9px;border-radius:50px}
+.fruit-card-body{padding:14px 16px}
+.fruit-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700}
+.fruit-origin{font-size:.75rem;color:#999;margin-top:2px}
+.fruit-price-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.fruit-price{font-size:1.1rem;font-weight:700;color:var(--grove)}
+.fruit-price span{font-size:.72rem;color:#999;font-weight:400}
+.add-btn{background:var(--mango);color:#fff;border:none;width:34px;height:34px;border-radius:50%;font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.add-btn:hover{background:var(--grove);transform:scale(1.1)}
+.qty-ctrl{display:none;align-items:center;gap:8px}
+.qty-ctrl.show{display:flex}
+.qty-btn{background:var(--blush);border:none;width:28px;height:28px;border-radius:50%;font-size:1rem;font-weight:700;color:var(--bark);transition:.2s}
+.qty-btn:hover{background:var(--mango);color:#fff}
+.qty-num{font-weight:700;font-size:.95rem;min-width:20px;text-align:center}
+
+/* ── WHY US ── */
+#why{padding:80px 5vw;background:var(--grove)}
+#why .section-eyebrow{color:var(--lime)}
+#why .section-title{color:#fff}
+.why-grid{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.why-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:26px;transition:.2s}
+.why-card:hover{background:rgba(255,255,255,.13)}
+.why-icon{font-size:2.2rem;margin-bottom:14px}
+.why-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:6px}
+.why-card p{font-size:.87rem;color:rgba(255,255,255,.7);line-height:1.65}
+
+/* ── REVIEWS ── */
+#reviews-section{padding:80px 5vw;background:var(--white)}
+.reviews-grid{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.review-card{background:var(--cream);border-radius:20px;padding:26px;box-shadow:0 4px 20px var(--shadow);transition:.3s}
+.review-card:hover{transform:translateY(-4px)}
+.stars{font-size:1rem;margin-bottom:12px}
+.review-text{font-size:.9rem;line-height:1.7;color:#333;font-style:italic;margin-bottom:18px}
+.reviewer{display:flex;align-items:center;gap:10px}
+.reviewer-avatar{width:40px;height:40px;border-radius:50%;background:var(--mango);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.reviewer-name{font-weight:700;font-size:.88rem}
+.reviewer-loc{font-size:.74rem;color:#999}
+
+/* ── MAP ── */
+#location-section{padding:80px 5vw;background:var(--bark)}
+#location-section .section-eyebrow{color:var(--lime)}
+#location-section .section-title{color:#fff}
+#location-section .section-title span{color:var(--mango)}
+.map-wrap{margin-top:36px;border-radius:22px;overflow:hidden;box-shadow:0 12px 50px rgba(0,0,0,.4)}
+.map-wrap iframe{width:100%;height:400px;border:0;display:block}
+.location-chips{margin-top:24px;display:flex;flex-wrap:wrap;gap:16px}
+.loc-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 18px;color:rgba(255,255,255,.85);font-size:.86rem;display:flex;align-items:center;gap:8px}
+
+/* ── FOOTER ── */
+footer{background:#0D0500;color:rgba(255,255,255,.5);text-align:center;padding:32px 5vw;font-size:.82rem}
+footer .footer-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:6px}
+footer .footer-logo span{color:var(--mango)}
+footer a{color:var(--lime)}
+
+/* ── WA FAB ── */
+.wa-fab{position:fixed;bottom:26px;right:26px;z-index:999;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.5);animation:waPulse 2.5s ease-in-out infinite;transition:.2s}
+.wa-fab:hover{transform:scale(1.1)}
+@keyframes waPulse{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.5)}50%{box-shadow:0 8px 40px rgba(37,211,102,.85),0 0 0 10px rgba(37,211,102,.1)}}
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:24px;padding:32px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative}
+.modal h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--bark);margin-bottom:6px}
+.modal-sub{font-size:.88rem;color:#888;margin-bottom:24px}
+.close-modal{position:absolute;top:16px;right:18px;background:var(--blush);border:none;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:var(--bark);display:flex;align-items:center;justify-content:center}
+
+/* ── CART MODAL ── */
+.cart-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #f0e8dc}
+.cart-item:last-child{border-bottom:none}
+.cart-emoji{font-size:2.2rem;width:50px;text-align:center}
+.cart-info{flex:1}
+.cart-item-name{font-weight:700;font-size:.95rem}
+.cart-item-sub{font-size:.78rem;color:#999;margin-top:2px}
+.cart-item-price{font-weight:700;color:var(--grove);font-size:.95rem}
+.cart-qty-ctrl{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cart-qty-btn{background:var(--blush);border:none;width:26px;height:26px;border-radius:50%;font-size:.9rem;font-weight:700}
+.cart-qty-btn:hover{background:var(--mango);color:#fff}
+.cart-summary{background:var(--cream);border-radius:14px;padding:16px;margin-top:16px}
+.cart-summary-row{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:6px}
+.cart-summary-row.total{font-weight:700;font-size:1.05rem;color:var(--grove);border-top:1px solid #e0d5c5;padding-top:10px;margin-top:6px}
+.checkout-btn{width:100%;background:var(--mango);color:#fff;border:none;padding:14px;border-radius:14px;font-size:1rem;font-weight:700;margin-top:16px;transition:.2s}
+.checkout-btn:hover{background:var(--grove)}
+.empty-cart{text-align:center;padding:32px 0;color:#bbb;font-size:3rem}
+
+/* ── AUTH MODAL ── */
+.auth-tabs{display:flex;gap:0;margin-bottom:24px;background:var(--blush);border-radius:12px;padding:4px}
+.auth-tab{flex:1;border:none;background:none;padding:9px;border-radius:10px;font-weight:600;font-size:.9rem;color:var(--bark);transition:.2s}
+.auth-tab.active{background:var(--mango);color:#fff}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--bark)}
+.form-group input{width:100%;padding:12px 14px;border:1.5px solid #e0d5c5;border-radius:12px;font-size:.95rem;outline:none;transition:.2s}
+.form-group input:focus{border-color:var(--mango);box-shadow:0 0 0 3px rgba(255,140,0,.12)}
+.form-hint{font-size:.78rem;color:#999;margin-top:4px}
+.otp-row{display:flex;gap:8px;justify-content:center;margin:16px 0}
+.otp-box{width:48px;height:52px;text-align:center;font-size:1.3rem;font-weight:700;border:1.5px solid #e0d5c5;border-radius:12px;outline:none;transition:.2s}
+.otp-box:focus{border-color:var(--mango);box-shadow:0 0 0 3px rgba(255,140,0,.12)}
+.auth-submit{width:100%;background:var(--mango);color:#fff;border:none;padding:13px;border-radius:12px;font-size:1rem;font-weight:700;transition:.2s;margin-top:4px}
+.auth-submit:hover{background:var(--grove)}
+.otp-timer{text-align:center;font-size:.82rem;color:#888;margin-top:8px}
+.resend-link{color:var(--mango);font-weight:600;cursor:pointer}
+.auth-step{display:none}
+.auth-step.active{display:block}
+.back-link{color:var(--mango);font-size:.85rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:16px;border:none;background:none}
+.social-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:#bbb;font-size:.82rem}
+.social-divider::before,.social-divider::after{content:'';flex:1;height:1px;background:#e8e0d5}
+.user-info{display:flex;align-items:center;gap:8px}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:var(--mango);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+.user-name{font-size:.88rem;font-weight:600}
+
+/* ── CHECKOUT MODAL ── */
+.checkout-steps{display:flex;gap:0;margin-bottom:24px}
+.checkout-step-indicator{flex:1;text-align:center;font-size:.75rem;font-weight:600;color:#bbb;padding-bottom:8px;border-bottom:2px solid #e8e0d5;transition:.2s}
+.checkout-step-indicator.active{color:var(--mango);border-bottom-color:var(--mango)}
+.checkout-step-indicator.done{color:var(--grove);border-bottom-color:var(--grove)}
+.checkout-form-step{display:none}
+.checkout-form-step.active{display:block}
+.delivery-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.delivery-option{border:1.5px solid #e0d5c5;border-radius:14px;padding:14px;cursor:pointer;transition:.2s;text-align:center}
+.delivery-option:hover,.delivery-option.selected{border-color:var(--mango);background:rgba(255,140,0,.06)}
+.delivery-option .d-icon{font-size:1.8rem;margin-bottom:6px}
+.delivery-option .d-label{font-weight:700;font-size:.9rem}
+.delivery-option .d-sub{font-size:.75rem;color:#999;margin-top:2px}
+.payment-options{display:grid;gap:10px;margin-bottom:16px}
+.payment-option{border:1.5px solid #e0d5c5;border-radius:14px;padding:14px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:12px}
+.payment-option:hover,.payment-option.selected{border-color:var(--mango);background:rgba(255,140,0,.06)}
+.payment-option .p-icon{font-size:1.6rem}
+.payment-option .p-label{font-weight:700;font-size:.92rem}
+.payment-option .p-sub{font-size:.75rem;color:#999}
+.order-summary-mini{background:var(--cream);border-radius:14px;padding:14px;margin-bottom:16px;max-height:140px;overflow-y:auto}
+.order-mini-item{display:flex;justify-content:space-between;font-size:.85rem;padding:3px 0}
+.next-btn,.place-btn{width:100%;background:var(--mango);color:#fff;border:none;padding:13px;border-radius:12px;font-size:1rem;font-weight:700;transition:.2s;margin-top:8px}
+.next-btn:hover,.place-btn:hover{background:var(--grove)}
+.back-btn{width:100%;background:var(--blush);color:var(--bark);border:none;padding:11px;border-radius:12px;font-size:.92rem;font-weight:600;transition:.2s;margin-top:8px}
+.back-btn:hover{background:#e8d5c0}
+.success-screen{text-align:center;padding:20px 0}
+.success-icon{font-size:4rem;margin-bottom:16px}
+.success-screen h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--grove);margin-bottom:8px}
+.success-screen p{font-size:.9rem;color:#666;line-height:1.6}
+.order-id-badge{display:inline-block;background:var(--blush);color:var(--mango);font-weight:700;padding:6px 16px;border-radius:50px;font-size:.9rem;margin:12px 0}
+
+/* ── ADMIN PAGE ── */
+#admin-page{background:#f4f6f9;min-height:100vh}
+.admin-nav{background:var(--grove);color:#fff;padding:14px 5vw;display:flex;align-items:center;justify-content:space-between}
+.admin-nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900}
+.admin-nav-logo span{color:var(--lime)}
+.admin-logout{background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 16px;border-radius:8px;font-size:.85rem;font-weight:600;transition:.2s}
+.admin-logout:hover{background:rgba(255,255,255,.25)}
+.admin-body{padding:32px 5vw}
+.admin-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--bark);margin-bottom:4px}
+.admin-sub{font-size:.88rem;color:#888;margin-bottom:28px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.stat-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.stat-card-icon{font-size:1.8rem;margin-bottom:8px}
+.stat-card-val{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--bark)}
+.stat-card-label{font-size:.78rem;color:#888;margin-top:2px}
+.stat-card-sub{font-size:.78rem;color:var(--grove);font-weight:600;margin-top:4px}
+.admin-section-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--bark);margin-bottom:14px}
+.orders-table-wrap{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow:hidden;margin-bottom:32px}
+.orders-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.orders-table th{background:var(--grove);color:#fff;padding:12px 14px;text-align:left;font-weight:600;font-size:.78rem;letter-spacing:.5px}
+.orders-table td{padding:12px 14px;border-bottom:1px solid #f0ece6;vertical-align:top}
+.orders-table tr:last-child td{border-bottom:none}
+.orders-table tr:hover td{background:#fdfaf6}
+.status-badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.5px}
+.status-new{background:#FFF3CD;color:#856404}
+.status-confirmed{background:#D1ECF1;color:#0C5460}
+.status-delivered{background:#D4EDDA;color:#155724}
+.status-cancelled{background:#F8D7DA;color:#721C24}
+.status-select{border:none;background:none;font-size:.78rem;font-weight:700;cursor:pointer;padding:3px 8px;border-radius:50px}
+.admin-tabs{display:flex;gap:0;background:#fff;border-radius:14px;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,.07);margin-bottom:20px;width:fit-content}
+.admin-tab{border:none;background:none;padding:9px 20px;border-radius:10px;font-weight:600;font-size:.88rem;color:var(--bark);transition:.2s}
+.admin-tab.active{background:var(--grove);color:#fff}
+.admin-tab-content{display:none}
+.admin-tab-content.active{display:block}
+.income-chart{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:20px}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:140px;margin-top:16px}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{width:100%;background:linear-gradient(180deg,var(--mango),#e07000);border-radius:6px 6px 0 0;transition:height .6s ease;min-height:4px}
+.bar-label{font-size:.7rem;color:#888;font-weight:600}
+.bar-val{font-size:.7rem;color:var(--bark);font-weight:700}
+.top-fruits-list{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.top-fruit-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f0ece6}
+.top-fruit-item:last-child{border-bottom:none}
+.top-fruit-rank{width:24px;height:24px;border-radius:50%;background:var(--mango);color:#fff;font-size:.75rem;font-weight:900;display:flex;align-items:center;justify-content:center}
+.top-fruit-emoji{font-size:1.6rem}
+.top-fruit-info{flex:1}
+.top-fruit-name{font-weight:700;font-size:.9rem}
+.top-fruit-qty{font-size:.75rem;color:#888}
+.top-fruit-revenue{font-weight:700;color:var(--grove);font-size:.9rem}
+.admin-login{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,var(--grove),#1a3d0e)}
+.admin-login-box{background:#fff;border-radius:24px;padding:36px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.admin-login-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--bark);margin-bottom:4px}
+.admin-login-box p{font-size:.88rem;color:#888;margin-bottom:24px}
+.admin-login-submit{width:100%;background:var(--grove);color:#fff;border:none;padding:13px;border-radius:12px;font-size:1rem;font-weight:700;transition:.2s;margin-top:4px}
+.admin-login-submit:hover{background:var(--bark)}
+.no-orders{text-align:center;padding:32px;color:#bbb;font-size:.9rem}
+.order-items-list{font-size:.78rem;color:#666}
+.order-actions{display:flex;gap:6px;margin-top:4px}
+.action-btn{border:none;padding:4px 10px;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:.2s}
+.action-wa{background:#e8f5e9;color:#2e7d32}
+.action-wa:hover{background:#25D366;color:#fff}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filter-select{border:1.5px solid #e0d5c5;border-radius:10px;padding:8px 12px;font-size:.85rem;outline:none;background:#fff}
+.search-input{border:1.5px solid #e0d5c5;border-radius:10px;padding:8px 14px;font-size:.85rem;outline:none;flex:1;min-width:180px}
+.search-input:focus{border-color:var(--mango)}
+
+@media(max-width:768px){
+  nav ul{display:none}
+  .fruit-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .delivery-options{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .orders-table{font-size:.8rem}
+  .orders-table th:nth-child(4),.orders-table td:nth-child(4){display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════════ MAIN PAGE ═══ -->
+<div id="main-page" class="page active">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Nadeem <span>Fruit</span> Paradise</div>
+    <div class="nav-right">
+      <div id="nav-user-area">
+        <button class="nav-btn primary" onclick="openAuth()">Login / Sign Up</button>
+      </div>
+      <button class="cart-btn" onclick="openCart()">
+        🛒 Cart <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-blob"></div>
+    <div class="hero-blob"></div>
+    <div class="hero-blob"></div>
+    <div class="floaters" id="floaters"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🌿 Kolkata's Freshest Since Day One</div>
+      <h1 class="hero-title">Nature's Best.<br><em>Delivered Fresh.</em></h1>
+      <p class="hero-sub">Hand-picked fruits from the finest orchards. Sweet, ripe, and at your door.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('shop-section').scrollIntoView({behavior:'smooth'})">🛒 Shop Now</button>
+        <a href="https://wa.me/918777276476?text=Hi, I want to order fruits!" class="btn-outline" target="_blank">💬 WhatsApp Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Fruit Varieties</div></div>
+        <div class="stat"><div class="stat-num">1000+</div><div class="stat-label">Happy Customers</div></div>
+        <div class="stat"><div class="stat-num">⭐ 4.9</div><div class="stat-label">Google Rating</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>🥭 Alphonso Mangoes</span><span>🍓 Strawberries</span><span>🍉 Watermelon</span>
+      <span>🍍 Pineapple</span><span>🍇 Seedless Grapes</span><span>🍒 Cherries</span>
+      <span>🫐 Blueberries</span><span>🥝 Kiwi</span><span>🍑 Peaches</span><span>🍈 Muskmelon</span>
+      <span>🥭 Alphonso Mangoes</span><span>🍓 Strawberries</span><span>🍉 Watermelon</span>
+      <span>🍍 Pineapple</span><span>🍇 Seedless Grapes</span><span>🍒 Cherries</span>
+      <span>🫐 Blueberries</span><span>🥝 Kiwi</span><span>🍑 Peaches</span><span>🍈 Muskmelon</span>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+  <section id="shop-section">
+    <div class="shop-intro">
+      <div class="section-eyebrow">Fresh Arrivals</div>
+      <h2 class="section-title">Order Premium <span>Fruits Online</span></h2>
+      <p>Farm-fresh, hand-picked, and packed with love. Add to cart and checkout in minutes.</p>
+    </div>
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tab active" data-cat="all">All Fruits</button>
+      <button class="filter-tab" data-cat="tropical">🌴 Tropical</button>
+      <button class="filter-tab" data-cat="berries">🍓 Berries</button>
+      <button class="filter-tab" data-cat="exotic">✨ Exotic</button>
+      <button class="filter-tab" data-cat="seasonal">🌸 Seasonal</button>
+    </div>
+    <div class="fruit-grid" id="fruit-grid"></div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="section-eyebrow">Why Choose Us</div>
+    <h2 class="section-title" style="color:#fff">Not Just a Shop. <span style="color:var(--lime)">A Fresh Promise.</span></h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🌅</div><h3>Daily Fresh Stock</h3><p>New arrivals every morning. Nothing sits longer than 24 hours.</p></div>
+      <div class="why-card"><div class="why-icon">🏆</div><h3>Premium Quality</h3><p>Hand-selected for ripeness, colour, and sweetness every time.</p></div>
+      <div class="why-card"><div class="why-icon">💬</div><h3>WhatsApp Ordering</h3><p>Message your list — we pack and confirm in minutes.</p></div>
+      <div class="why-card"><div class="why-icon">⚖️</div><h3>Honest Weighing</h3><p>Full weight, every time. Scale always on display.</p></div>
+      <div class="why-card"><div class="why-icon">🚴</div><h3>Local Delivery</h3><p>Quick delivery in the neighbourhood, ask when ordering.</p></div>
+      <div class="why-card"><div class="why-icon">🤝</div><h3>Family Business</h3><p>Run with love. Every customer treated like a neighbour.</p></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews-section">
+    <div class="section-eyebrow">Customer Love</div>
+    <h2 class="section-title">What Kolkata <span>Says About Us</span></h2>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="stars">⭐⭐⭐⭐⭐</div><p class="review-text">"Best mangoes in Kolkata. Alphonso here is genuinely sweeter than supermarkets. Regular for 2 years!"</p><div class="reviewer"><div class="reviewer-avatar">R</div><div><div class="reviewer-name">Riya Sharma</div><div class="reviewer-loc">Ballygunge</div></div></div></div>
+      <div class="review-card"><div class="stars">⭐⭐⭐⭐⭐</div><p class="review-text">"WhatsApp ordering is so convenient! Message in the morning, pick up on the way home. Highly recommend!"</p><div class="reviewer"><div class="reviewer-avatar">A</div><div><div class="reviewer-name">Arjun Dey</div><div class="reviewer-loc">Park Street</div></div></div></div>
+      <div class="review-card"><div class="stars">⭐⭐⭐⭐⭐</div><p class="review-text">"Ordered a fruit basket for gifting. Beautifully packed, every fruit perfectly ripe. Everyone was impressed!"</p><div class="reviewer"><div class="reviewer-avatar">S</div><div><div class="reviewer-name">Sunita Agarwal</div><div class="reviewer-loc">Local Customer</div></div></div></div>
+      <div class="review-card"><div class="stars">⭐⭐⭐⭐⭐</div><p class="review-text">"Prices reasonable for the quality. Seasonal fruits always stocked before anyone else. Hidden gem!"</p><div class="reviewer"><div class="reviewer-avatar">M</div><div><div class="reviewer-name">Md. Farhan</div><div class="reviewer-loc">Nearby Resident</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="location-section">
+    <div class="section-eyebrow">Find Us</div>
+    <h2 class="section-title">Visit <span>Nadeem Fruit Paradise</span></h2>
+    <div class="map-wrap">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14!2d88.3582433!3d22.580667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277a5c1ed8383%3A0xf5244983ddff484b!2sNadeem%20fruit%20paradise!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="location-chips">
+      <div class="loc-chip">📍 Kolkata, West Bengal</div>
+      <div class="loc-chip">🕗 Open Daily · Morning to Evening</div>
+      <div class="loc-chip">🛒 Walk-in & Online Orders</div>
+      <div class="loc-chip">🗺️ <a href="https://maps.app.goo.gl/RKkdjvXegKfA6u7i7" target="_blank" style="color:var(--lime);font-weight:600">Open in Google Maps →</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Nadeem <span>Fruit</span> Paradise</div>
+    <p>Kolkata's freshest fruit shop — hand-picked quality, every day.</p>
+    <p style="margin-top:10px"><a href="https://maps.app.goo.gl/RKkdjvXegKfA6u7i7" target="_blank">📍 Google Maps</a> &nbsp;·&nbsp; <a href="https://wa.me/918777276476" target="_blank">💬 WhatsApp</a> &nbsp;·&nbsp; <a href="#" onclick="showAdminLogin();return false">🔐 Admin</a></p>
+    <p style="margin-top:14px;opacity:.35">© 2026 Nadeem Fruit Paradise · All rights reserved</p>
+  </footer>
+
+  <a class="wa-fab" href="https://wa.me/918777276476?text=Hi, I want to order fruits!" target="_blank" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════ ADMIN PAGE ═══ -->
+<div id="admin-page" class="page">
+
+  <!-- ADMIN LOGIN -->
+  <div id="admin-login-screen" class="admin-login">
+    <div class="admin-login-box">
+      <h2>🔐 Admin Login</h2>
+      <p>Nadeem Fruit Paradise — Management Portal</p>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="admin-user-input" placeholder="admin" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="admin-pass-input" placeholder="••••••••" />
+      </div>
+      <button class="admin-login-submit" onclick="doAdminLogin()">Login to Dashboard</button>
+      <button class="back-btn" style="margin-top:10px" onclick="showMainPage()">← Back to Shop</button>
+      <p style="font-size:.75rem;color:#bbb;margin-top:14px;text-align:center">Default: admin / nadeem2026</p>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="admin-dashboard" style="display:none">
+    <div class="admin-nav">
+      <div class="admin-nav-logo">Nadeem <span>Admin</span> Panel</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:.82rem;opacity:.7" id="admin-welcome">Welcome, Admin</span>
+        <button class="admin-logout" onclick="adminLogout()">Logout</button>
+        <button class="admin-logout" onclick="showMainPage()">← Shop</button>
+      </div>
+    </div>
+
+    <div class="admin-body">
+      <div class="admin-title">Dashboard</div>
+      <div class="admin-sub" id="admin-date-sub">Loading...</div>
+
+      <!-- STAT CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-card-icon">📦</div><div class="stat-card-val" id="stat-total-orders">0</div><div class="stat-card-label">Total Orders</div><div class="stat-card-sub" id="stat-today-orders">0 today</div></div>
+        <div class="stat-card"><div class="stat-card-icon">💰</div><div class="stat-card-val" id="stat-total-revenue">₹0</div><div class="stat-card-label">Total Revenue</div><div class="stat-card-sub" id="stat-today-revenue">₹0 today</div></div>
+        <div class="stat-card"><div class="stat-card-icon">👥</div><div class="stat-card-val" id="stat-customers">0</div><div class="stat-card-label">Customers</div><div class="stat-card-sub">Unique buyers</div></div>
+        <div class="stat-card"><div class="stat-card-icon">🔄</div><div class="stat-card-val" id="stat-pending">0</div><div class="stat-card-label">Pending Orders</div><div class="stat-card-sub" style="color:var(--red)">Need action</div></div>
+      </div>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab('orders',this)">📦 Orders</button>
+        <button class="admin-tab" onclick="switchAdminTab('analytics',this)">📊 Analytics</button>
+        <button class="admin-tab" onclick="switchAdminTab('inventory',this)">🍎 Inventory</button>
+      </div>
+
+      <!-- ORDERS TAB -->
+      <div class="admin-tab-content active" id="tab-orders">
+        <div class="filter-row">
+          <input class="search-input" id="order-search" placeholder="🔍 Search by name, phone, order ID..." oninput="renderOrders()"/>
+          <select class="filter-select" id="order-status-filter" onchange="renderOrders()">
+            <option value="all">All Status</option>
+            <option value="new">New</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <select class="filter-select" id="order-payment-filter" onchange="renderOrders()">
+            <option value="all">All Payments</option>
+            <option value="cod">Cash on Delivery</option>
+            <option value="upi">UPI</option>
+            <option value="whatsapp">WhatsApp Pay</option>
+          </select>
+        </div>
+        <div class="orders-table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ANALYTICS TAB -->
+      <div class="admin-tab-content" id="tab-analytics">
+        <div class="income-chart">
+          <div class="admin-section-title">Revenue (Last 7 Days)</div>
+          <div class="bar-chart" id="revenue-chart"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+          <div class="top-fruits-list">
+            <div class="admin-section-title">🏆 Top Selling Fruits</div>
+            <div id="top-fruits-list"></div>
+          </div>
+          <div class="top-fruits-list">
+            <div class="admin-section-title">💳 Payment Breakdown</div>
+            <div id="payment-breakdown"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVENTORY TAB -->
+      <div class="admin-tab-content" id="tab-inventory">
+        <div class="orders-table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr><th>Fruit</th><th>Price/kg</th><th>Category</th><th>Status</th><th>Orders</th></tr>
+            </thead>
+            <tbody id="inventory-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ MODALS ═══════════════════ -->
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <button class="close-modal" onclick="closeModal('auth-modal')">✕</button>
+    <h2>Welcome! 👋</h2>
+    <p class="modal-sub">Login or create your account to order</p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login',this)">Login</button>
+      <button class="auth-tab" onclick="switchAuthTab('signup',this)">Sign Up</button>
+    </div>
+
+    <!-- LOGIN FLOW -->
+    <div id="auth-login">
+      <!-- Step 1: Enter phone/email -->
+      <div class="auth-step active" id="login-step1">
+        <div class="form-group">
+          <label>Phone Number or Email</label>
+          <input type="text" id="login-contact" placeholder="+91 9876543210 or email@example.com" />
+          <div class="form-hint">We'll send an OTP to verify</div>
+        </div>
+        <button class="auth-submit" onclick="sendLoginOTP()">Send OTP →</button>
+      </div>
+      <!-- Step 2: Enter OTP -->
+      <div class="auth-step" id="login-step2">
+        <button class="back-link" onclick="goAuthStep('login',1)">← Change number</button>
+        <p style="font-size:.88rem;color:#666;margin-bottom:16px">Enter the 6-digit OTP sent to <strong id="login-contact-display"></strong></p>
+        <div class="otp-row" id="login-otp-row">
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'login-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'login-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'login-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'login-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'login-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'login-otp-row')"/>
+        </div>
+        <div class="otp-timer" id="login-timer">Resend OTP in <strong id="login-countdown">30</strong>s</div>
+        <button class="auth-submit" onclick="verifyLoginOTP()">Verify & Login ✓</button>
+      </div>
+    </div>
+
+    <!-- SIGNUP FLOW -->
+    <div id="auth-signup" style="display:none">
+      <div class="auth-step active" id="signup-step1">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signup-name" placeholder="Your full name" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="signup-phone" placeholder="+91 9876543210" />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="signup-email" placeholder="email@example.com" />
+        </div>
+        <button class="auth-submit" onclick="sendSignupOTP()">Send OTP →</button>
+      </div>
+      <div class="auth-step" id="signup-step2">
+        <button class="back-link" onclick="goAuthStep('signup',1)">← Go back</button>
+        <p style="font-size:.88rem;color:#666;margin-bottom:16px">OTP sent to <strong id="signup-contact-display"></strong></p>
+        <div class="otp-row" id="signup-otp-row">
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'signup-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'signup-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'signup-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'signup-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'signup-otp-row')"/>
+          <input class="otp-box" maxlength="1" oninput="otpNext(this,'signup-otp-row')"/>
+        </div>
+        <div class="otp-timer">Resend OTP in <strong id="signup-countdown">30</strong>s</div>
+        <button class="auth-submit" onclick="verifySignupOTP()">Create Account ✓</button>
+      </div>
+    </div>
+
+    <div class="social-divider">or continue as guest</div>
+    <button class="back-btn" onclick="closeModal('auth-modal');showToast('Continuing as guest 👤')">Continue as Guest</button>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cart-modal">
+  <div class="modal">
+    <button class="close-modal" onclick="closeModal('cart-modal')">✕</button>
+    <h2>Your Cart 🛒</h2>
+    <p class="modal-sub" id="cart-modal-sub">0 items</p>
+    <div id="cart-items-container"></div>
+    <div id="cart-summary-container"></div>
+    <button class="checkout-btn" id="cart-checkout-btn" onclick="openCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal">
+    <button class="close-modal" onclick="closeModal('checkout-modal')">✕</button>
+    <h2>Checkout</h2>
+    <div class="checkout-steps">
+      <div class="checkout-step-indicator active" id="csi-1">1. Details</div>
+      <div class="checkout-step-indicator" id="csi-2">2. Delivery</div>
+      <div class="checkout-step-indicator" id="csi-3">3. Payment</div>
+    </div>
+
+    <!-- Step 1: Customer Details -->
+    <div class="checkout-form-step active" id="co-step1">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="co-name" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" id="co-phone" placeholder="+91 9876543210" />
+      </div>
+      <div class="form-group">
+        <label>Email (optional)</label>
+        <input type="email" id="co-email" placeholder="email@example.com" />
+      </div>
+      <button class="next-btn" onclick="coNext(2)">Next: Delivery →</button>
+    </div>
+
+    <!-- Step 2: Delivery -->
+    <div class="checkout-form-step" id="co-step2">
+      <p style="font-size:.85rem;font-weight:600;margin-bottom:10px">How would you like to receive your order?</p>
+      <div class="delivery-options">
+        <div class="delivery-option selected" id="do-pickup" onclick="selectDelivery('pickup')">
+          <div class="d-icon">🏪</div>
+          <div class="d-label">Pick Up</div>
+          <div class="d-sub">Free · Ready in 30 min</div>
+        </div>
+        <div class="delivery-option" id="do-delivery" onclick="selectDelivery('delivery')">
+          <div class="d-icon">🚴</div>
+          <div class="d-label">Home Delivery</div>
+          <div class="d-sub">₹30 · 45–60 min</div>
+        </div>
+      </div>
+      <div id="address-form" style="display:none">
+        <div class="form-group">
+          <label>Delivery Address *</label>
+          <textarea id="co-address" placeholder="House/Flat no., Street, Area, Kolkata" style="width:100%;padding:12px;border:1.5px solid #e0d5c5;border-radius:12px;font-size:.92rem;min-height:80px;outline:none;resize:vertical;font-family:inherit"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Landmark (optional)</label>
+          <input type="text" id="co-landmark" placeholder="Near park, school, etc." />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Special Instructions (optional)</label>
+        <input type="text" id="co-notes" placeholder="Ripe fruits only, no seeds, etc." />
+      </div>
+      <button class="next-btn" onclick="coNext(3)">Next: Payment →</button>
+      <button class="back-btn" onclick="coBack(1)">← Back</button>
+    </div>
+
+    <!-- Step 3: Payment -->
+    <div class="checkout-form-step" id="co-step3">
+      <div class="order-summary-mini" id="order-summary-mini"></div>
+      <p style="font-size:.85rem;font-weight:600;margin-bottom:10px">Choose payment method:</p>
+      <div class="payment-options">
+        <div class="payment-option selected" id="pm-cod" onclick="selectPayment('cod')">
+          <div class="p-icon">💵</div>
+          <div><div class="p-label">Cash on Delivery</div><div class="p-sub">Pay when order arrives</div></div>
+        </div>
+        <div class="payment-option" id="pm-upi" onclick="selectPayment('upi')">
+          <div class="p-icon">📱</div>
+          <div><div class="p-label">UPI / GPay / PhonePe</div><div class="p-sub">Scan QR at shop</div></div>
+        </div>
+        <div class="payment-option" id="pm-whatsapp" onclick="selectPayment('whatsapp')">
+          <div class="p-icon">💚</div>
+          <div><div class="p-label">WhatsApp Pay</div><div class="p-sub">Pay via WhatsApp</div></div>
+        </div>
+      </div>
+      <div style="background:var(--cream);border-radius:12px;padding:14px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:6px"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:6px"><span>Delivery</span><span id="co-delivery-fee">₹0</span></div>
+        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1rem;border-top:1px solid #e0d5c5;padding-top:8px;margin-top:4px;color:var(--grove)"><span>Total</span><span id="co-total">₹0</span></div>
+      </div>
+      <button class="place-btn" onclick="placeOrder()">✅ Place Order</button>
+      <button class="back-btn" onclick="coBack(2)">← Back</button>
+    </div>
+
+    <!-- Success Screen -->
+    <div class="checkout-form-step" id="co-step4">
+      <div class="success-screen">
+        <div class="success-icon">🎉</div>
+        <h3>Order Placed!</h3>
+        <div class="order-id-badge" id="success-order-id">Order #NFP0001</div>
+        <p>Your order has been received. We'll contact you on WhatsApp shortly to confirm.</p>
+        <p style="margin-top:10px;font-size:.82rem;color:#999">Keep your phone handy on <strong id="success-phone"></strong></p>
+        <button class="btn-primary" style="margin-top:22px;width:100%;justify-content:center" onclick="closeModal('checkout-modal');closeModal('cart-modal')">Continue Shopping 🍉</button>
+        <a id="wa-confirm-link" href="#" target="_blank" style="display:block;margin-top:10px;background:#25D366;color:#fff;padding:12px;border-radius:12px;font-weight:700;font-size:.95rem;text-align:center">💬 Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════════════════
+const FRUITS = [
+  {id:'f1',e:'🥭',name:'Alphonso Mango',origin:'Ratnagiri, Maharashtra',price:180,unit:'kg',cat:'tropical',tag:'SEASONAL STAR',gradient:'linear-gradient(135deg,#fff3e0,#ffe0b2)'},
+  {id:'f2',e:'🍉',name:'Seedless Watermelon',origin:'Local Farms, Bengal',price:35,unit:'kg',cat:'tropical',tag:'SUMMER SPECIAL',gradient:'linear-gradient(135deg,#fce4ec,#ffcdd2)'},
+  {id:'f3',e:'🍓',name:'Fresh Strawberries',origin:'Mahabaleshwar',price:120,unit:'250g',cat:'berries',tag:'IMPORTED',gradient:'linear-gradient(135deg,#fce4ec,#f8bbd9)'},
+  {id:'f4',e:'🍍',name:'Sweet Pineapple',origin:'West Bengal',price:60,unit:'piece',cat:'tropical',tag:'DAILY FRESH',gradient:'linear-gradient(135deg,#fff9c4,#fff176)'},
+  {id:'f5',e:'🍇',name:'Seedless Grapes',origin:'Nashik, Maharashtra',price:90,unit:'kg',cat:'berries',tag:'PREMIUM',gradient:'linear-gradient(135deg,#e3f2fd,#bbdefb)'},
+  {id:'f6',e:'🫐',name:'Blueberries',origin:'Imported',price:250,unit:'125g',cat:'berries',tag:'EXOTIC',gradient:'linear-gradient(135deg,#ede7f6,#d1c4e9)'},
+  {id:'f7',e:'🥝',name:'Green Kiwi',origin:'New Zealand',price:200,unit:'4 pcs',cat:'exotic',tag:'IMPORTED',gradient:'linear-gradient(135deg,#e8f5e9,#c8e6c9)'},
+  {id:'f8',e:'🍒',name:'Red Cherries',origin:'Himachal Pradesh',price:300,unit:'500g',cat:'berries',tag:'LIMITED',gradient:'linear-gradient(135deg,#fce4ec,#ffcdd2)'},
+  {id:'f9',e:'🍑',name:'Yellow Peaches',origin:'Himachal Pradesh',price:140,unit:'kg',cat:'seasonal',tag:'SEASONAL',gradient:'linear-gradient(135deg,#fff3e0,#ffe0b2)'},
+  {id:'f10',e:'🍈',name:'Muskmelon',origin:'West Bengal',price:45,unit:'kg',cat:'seasonal',tag:'SUMMER',gradient:'linear-gradient(135deg,#f3e5f5,#e1bee7)'},
+  {id:'f11',e:'🍊',name:'Nagpur Oranges',origin:'Nagpur, Maharashtra',price:80,unit:'kg',cat:'seasonal',tag:'POPULAR',gradient:'linear-gradient(135deg,#fff3e0,#ffe0b2)'},
+  {id:'f12',e:'🍌',name:'Robusta Bananas',origin:'Tamil Nadu',price:40,unit:'dozen',cat:'tropical',tag:'DAILY FRESH',gradient:'linear-gradient(135deg,#fff9c4,#fffde7)'},
+];
+
+// ── STORAGE HELPERS (localStorage for persistence)
+function saveData(key,val){try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}}
+function loadData(key,def){try{const v=localStorage.getItem(key);return v?JSON.parse(v):def}catch(e){return def}}
+
+let cart = loadData('nfp_cart',[]);
+let currentUser = loadData('nfp_user',null);
+let orders = loadData('nfp_orders',[]);
+let users = loadData('nfp_users',[]);
+
+// OTP store (session only — not persisted)
+let pendingOTP = {};
+let otpTimers = {};
+
+// ═══════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  renderFruits('all');
+  updateCartBadge();
+  updateNavUser();
+  initFloaters();
+  setupFilterTabs();
+});
+
+function initFloaters(){
+  const fruits=['🍓','🥭','🍉','🍍','🍇','🍒','🫐','🥝','🍑','🍈','🍊','🍋','🍌','🍏','🍎','🍐'];
+  const c=document.getElementById('floaters');
+  fruits.forEach((f,i)=>{
+    const el=document.createElement('span');
+    el.className='floater';el.textContent=f;
+    el.style.left=(5+(i/fruits.length)*90)+'%';
+    el.style.animationDuration=(12+Math.random()*14)+'s';
+    el.style.animationDelay=(Math.random()*12)+'s';
+    c.appendChild(el);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+//  FRUIT GRID
+// ═══════════════════════════════════════════════════════════
+function setupFilterTabs(){
+  document.querySelectorAll('.filter-tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-tab').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      renderFruits(t.dataset.cat);
+    });
+  });
+}
+
+function renderFruits(cat){
+  const list=cat==='all'?FRUITS:FRUITS.filter(f=>f.cat===cat);
+  const g=document.getElementById('fruit-grid');
+  g.innerHTML=list.map(f=>{
+    const qty=getCartQty(f.id);
+    return `<div class="fruit-card" id="card-${f.id}">
+      <div class="fruit-emoji-box" style="background:${f.gradient}">
+        <span style="filter:drop-shadow(0 4px 8px rgba(0,0,0,.15))">${f.e}</span>
+        <div class="fruit-badge-tag">${f.tag}</div>
+      </div>
+      <div class="fruit-card-body">
+        <div class="fruit-name">${f.name}</div>
+        <div class="fruit-origin">${f.origin}</div>
+        <div class="fruit-price-row">
+          <div class="fruit-price">₹${f.price} <span>/ ${f.unit}</span></div>
+          <div>
+            <button class="add-btn" id="addbtn-${f.id}" onclick="addToCart('${f.id}')" style="${qty>0?'display:none':''}">+</button>
+            <div class="qty-ctrl ${qty>0?'show':''}" id="qty-${f.id}">
+              <button class="qty-btn" onclick="changeQty('${f.id}',-1)">−</button>
+              <span class="qty-num" id="qnum-${f.id}">${qty}</span>
+              <button class="qty-btn" onclick="changeQty('${f.id}',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════
+//  CART
+// ═══════════════════════════════════════════════════════════
+function getCartQty(id){const i=cart.find(c=>c.id===id);return i?i.qty:0;}
+
+function addToCart(id){
+  const f=FRUITS.find(x=>x.id===id);
+  if(!f)return;
+  const existing=cart.find(c=>c.id===id);
+  if(existing){existing.qty++;}
+  else{cart.push({id,name:f.name,e:f.e,price:f.price,unit:f.unit,qty:1});}
+  saveData('nfp_cart',cart);
+  updateCartBadge();
+  updateFruitCardQty(id);
+  showToast(`${f.e} ${f.name} added to cart!`);
+}
+
+function changeQty(id,delta){
+  const i=cart.findIndex(c=>c.id===id);
+  if(i===-1&&delta>0){addToCart(id);return;}
+  if(i===-1)return;
+  cart[i].qty+=delta;
+  if(cart[i].qty<=0)cart.splice(i,1);
+  saveData('nfp_cart',cart);
+  updateCartBadge();
+  updateFruitCardQty(id);
+  if(document.getElementById('cart-modal').classList.contains('open'))renderCartModal();
+}
+
+function updateFruitCardQty(id){
+  const qty=getCartQty(id);
+  const addBtn=document.getElementById('addbtn-'+id);
+  const qtyCtrl=document.getElementById('qty-'+id);
+  const qnum=document.getElementById('qnum-'+id);
+  if(addBtn)addBtn.style.display=qty>0?'none':'flex';
+  if(qtyCtrl){qtyCtrl.classList.toggle('show',qty>0);}
+  if(qnum)qnum.textContent=qty;
+}
+
+function updateCartBadge(){
+  const total=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cart-count').textContent=total;
+}
+
+function openCart(){
+  renderCartModal();
+  openModal('cart-modal');
+}
+
+function renderCartModal(){
+  const container=document.getElementById('cart-items-container');
+  const summaryContainer=document.getElementById('cart-summary-container');
+  const checkoutBtn=document.getElementById('cart-checkout-btn');
+  const sub=document.getElementById('cart-modal-sub');
+  if(cart.length===0){
+    container.innerHTML='<div class="empty-cart">🛒<br><span style="font-size:1rem;color:#bbb">Your cart is empty</span></div>';
+    summaryContainer.innerHTML='';
+    checkoutBtn.style.display='none';
+    sub.textContent='0 items';
+    return;
+  }
+  const totalItems=cart.reduce((s,i)=>s+i.qty,0);
+  sub.textContent=`${totalItems} item${totalItems>1?'s':''}`;
+  checkoutBtn.style.display='block';
+  container.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-emoji">${item.e}</div>
+      <div class="cart-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-sub">₹${item.price} / ${item.unit}</div>
+        <div class="cart-qty-ctrl">
+          <button class="cart-qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+          <span style="font-weight:700;font-size:.9rem">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+        </div>
+      </div>
+      <div class="cart-item-price">₹${item.price*item.qty}</div>
+    </div>`).join('');
+  const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  summaryContainer.innerHTML=`
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+      <div class="cart-summary-row"><span>Delivery</span><span style="color:var(--grove)">Calculated at checkout</span></div>
+      <div class="cart-summary-row total"><span>Estimated Total</span><span>₹${subtotal}</span></div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════════════════════
+function openAuth(){openModal('auth-modal');}
+
+function switchAuthTab(tab,el){
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('auth-login').style.display=tab==='login'?'block':'none';
+  document.getElementById('auth-signup').style.display=tab==='signup'?'block':'none';
+}
+
+function goAuthStep(flow,step){
+  document.querySelectorAll(`#auth-${flow} .auth-step`).forEach(s=>s.classList.remove('active'));
+  document.getElementById(`${flow}-step${step}`).classList.add('active');
+}
+
+// Generate fake OTP (in real app, use SMS/email API)
+function generateOTP(){return Math.floor(100000+Math.random()*900000).toString();}
+
+function sendLoginOTP(){
+  const contact=document.getElementById('login-contact').value.trim();
+  if(!contact){showToast('Please enter phone or email','error');return;}
+  pendingOTP.login=generateOTP();
+  // Show OTP in toast for demo (in production, send via SMS/email API)
+  showToast(`OTP: ${pendingOTP.login} (Demo — use this code)`);
+  document.getElementById('login-contact-display').textContent=contact;
+  goAuthStep('login',2);
+  startOTPTimer('login-countdown','login');
+}
+
+function sendSignupOTP(){
+  const name=document.getElementById('signup-name').value.trim();
+  const phone=document.getElementById('signup-phone').value.trim();
+  const email=document.getElementById('signup-email').value.trim();
+  if(!name||!phone){showToast('Please fill name and phone','error');return;}
+  pendingOTP.signup=generateOTP();
+  showToast(`OTP: ${pendingOTP.signup} (Demo — use this code)`);
+  document.getElementById('signup-contact-display').textContent=phone||email;
+  goAuthStep('signup',2);
+  startOTPTimer('signup-countdown','signup');
+}
+
+function getOTPValue(rowId){
+  return Array.from(document.querySelectorAll(`#${rowId} .otp-box`)).map(b=>b.value).join('');
+}
+
+function verifyLoginOTP(){
+  const entered=getOTPValue('login-otp-row');
+  if(entered.length<6){showToast('Enter all 6 digits','error');return;}
+  if(entered===pendingOTP.login){
+    const contact=document.getElementById('login-contact').value.trim();
+    // Find or create user
+    let user=users.find(u=>u.phone===contact||u.email===contact);
+    if(!user){user={id:'u'+Date.now(),name:contact,phone:contact,email:'',joinedAt:new Date().toISOString()};users.push(user);saveData('nfp_users',users);}
+    currentUser=user;saveData('nfp_user',currentUser);
+    closeModal('auth-modal');updateNavUser();
+    showToast(`Welcome back! 👋`);
+    // Pre-fill checkout
+    if(currentUser.name){document.getElementById('co-name').value=currentUser.name;}
+    if(currentUser.phone){document.getElementById('co-phone').value=currentUser.phone;}
+  } else {showToast('Incorrect OTP. Try again.','error');}
+}
+
+function verifySignupOTP(){
+  const entered=getOTPValue('signup-otp-row');
+  if(entered.length<6){showToast('Enter all 6 digits','error');return;}
+  if(entered===pendingOTP.signup){
+    const name=document.getElementById('signup-name').value.trim();
+    const phone=document.getElementById('signup-phone').value.trim();
+    const email=document.getElementById('signup-email').value.trim();
+    const user={id:'u'+Date.now(),name,phone,email,joinedAt:new Date().toISOString()};
+    users.push(user);saveData('nfp_users',users);
+    currentUser=user;saveData('nfp_user',currentUser);
+    closeModal('auth-modal');updateNavUser();
+    showToast(`Account created! Welcome, ${name}! 🎉`);
+    document.getElementById('co-name').value=name;
+    document.getElementById('co-phone').value=phone;
+    document.getElementById('co-email').value=email;
+  } else {showToast('Incorrect OTP. Try again.','error');}
+}
+
+function updateNavUser(){
+  const area=document.getElementById('nav-user-area');
+  if(currentUser){
+    const initial=(currentUser.name||'U')[0].toUpperCase();
+    area.innerHTML=`<div class="user-info">
+      <div class="user-avatar">${initial}</div>
+      <span class="user-name">${currentUser.name||currentUser.phone}</span>
+      <button class="nav-btn" onclick="logoutUser()" style="font-size:.8rem">Logout</button>
+    </div>`;
+  } else {
+    area.innerHTML=`<button class="nav-btn primary" onclick="openAuth()">Login / Sign Up</button>`;
+  }
+}
+
+function logoutUser(){currentUser=null;saveData('nfp_user',null);updateNavUser();showToast('Logged out');}
+
+function otpNext(input,rowId){
+  const boxes=document.querySelectorAll(`#${rowId} .otp-box`);
+  const idx=Array.from(boxes).indexOf(input);
+  if(input.value&&idx<boxes.length-1)boxes[idx+1].focus();
+}
+
+function startOTPTimer(countdownId,flow){
+  clearInterval(otpTimers[flow]);
+  let sec=30;
+  const el=document.getElementById(countdownId);
+  otpTimers[flow]=setInterval(()=>{
+    sec--;
+    if(el)el.textContent=sec;
+    if(sec<=0){clearInterval(otpTimers[flow]);if(el)el.parentElement.innerHTML='<span class="resend-link" onclick="resendOTP(\''+flow+'\')">Resend OTP</span>';}
+  },1000);
+}
+
+function resendOTP(flow){
+  if(flow==='login')sendLoginOTP();
+  else sendSignupOTP();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  CHECKOUT
+// ═══════════════════════════════════════════════════════════
+let checkoutState={delivery:'pickup',payment:'cod',currentStep:1};
+
+function openCheckout(){
+  if(cart.length===0){showToast('Your cart is empty!','error');return;}
+  closeModal('cart-modal');
+  checkoutState={delivery:'pickup',payment:'cod',currentStep:1};
+  showCoStep(1);
+  // Pre-fill if logged in
+  if(currentUser){
+    if(currentUser.name)document.getElementById('co-name').value=currentUser.name;
+    if(currentUser.phone)document.getElementById('co-phone').value=currentUser.phone;
+    if(currentUser.email)document.getElementById('co-email').value=currentUser.email;
+  }
+  openModal('checkout-modal');
+}
+
+function showCoStep(n){
+  for(let i=1;i<=4;i++){
+    document.getElementById('co-step'+i).classList.toggle('active',i===n);
+    const ind=document.getElementById('csi-'+i);
+    if(ind){ind.classList.toggle('active',i===n);ind.classList.toggle('done',i<n);}
+  }
+  checkoutState.currentStep=n;
+  if(n===3)renderCoSummary();
+}
+
+function coNext(step){
+  if(step===2){
+    const name=document.getElementById('co-name').value.trim();
+    const phone=document.getElementById('co-phone').value.trim();
+    if(!name){showToast('Please enter your name','error');return;}
+    if(!phone){showToast('Please enter your phone number','error');return;}
+  }
+  if(step===3){
+    if(checkoutState.delivery==='delivery'){
+      const addr=document.getElementById('co-address').value.trim();
+      if(!addr){showToast('Please enter delivery address','error');return;}
+    }
+  }
+  showCoStep(step);
+}
+function coBack(step){showCoStep(step);}
+
+function selectDelivery(type){
+  checkoutState.delivery=type;
+  document.getElementById('do-pickup').classList.toggle('selected',type==='pickup');
+  document.getElementById('do-delivery').classList.toggle('selected',type==='delivery');
+  document.getElementById('address-form').style.display=type==='delivery'?'block':'none';
+}
+
+function selectPayment(type){
+  checkoutState.payment=type;
+  ['cod','upi','whatsapp'].forEach(t=>{document.getElementById('pm-'+t).classList.toggle('selected',t===type);});
+}
+
+function renderCoSummary(){
+  const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const deliveryFee=checkoutState.delivery==='delivery'?30:0;
+  const total=subtotal+deliveryFee;
+  document.getElementById('co-subtotal').textContent='₹'+subtotal;
+  document.getElementById('co-delivery-fee').textContent=deliveryFee===0?'Free':'₹'+deliveryFee;
+  document.getElementById('co-total').textContent='₹'+total;
+  document.getElementById('order-summary-mini').innerHTML=cart.map(i=>`
+    <div class="order-mini-item"><span>${i.e} ${i.name} ×${i.qty}</span><span>₹${i.price*i.qty}</span></div>`).join('');
+}
+
+function placeOrder(){
+  const name=document.getElementById('co-name').value.trim();
+  const phone=document.getElementById('co-phone').value.trim();
+  const email=document.getElementById('co-email').value.trim();
+  const address=document.getElementById('co-address').value.trim();
+  const notes=document.getElementById('co-notes').value.trim();
+  const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const deliveryFee=checkoutState.delivery==='delivery'?30:0;
+  const total=subtotal+deliveryFee;
+  const orderId='NFP'+String(orders.length+1).padStart(4,'0');
+  const order={
+    id:orderId,
+    name,phone,email,
+    address:checkoutState.delivery==='delivery'?(address+(document.getElementById('co-landmark').value?' – '+document.getElementById('co-landmark').value:'')):'Pickup',
+    notes,
+    items:[...cart],
+    subtotal,deliveryFee,total,
+    delivery:checkoutState.delivery,
+    payment:checkoutState.payment,
+    status:'new',
+    createdAt:new Date().toISOString(),
+    userId:currentUser?currentUser.id:null
+  };
+  orders.push(order);
+  saveData('nfp_orders',orders);
+  // Clear cart
+  cart=[];saveData('nfp_cart',cart);updateCartBadge();
+  // Refresh grid quantities
+  FRUITS.forEach(f=>updateFruitCardQty(f.id));
+  // Show success
+  showCoStep(4);
+  document.getElementById('success-order-id').textContent='Order #'+orderId;
+  document.getElementById('success-phone').textContent=phone;
+  const waMsg=encodeURIComponent(`Hi! I just placed order #${orderId} on your website.\nName: ${name}\nPhone: ${phone}\nItems: ${cart.map?'':order.items.map(i=>`${i.e}${i.name} x${i.qty}`).join(', ')}\nTotal: ₹${total}\nPayment: ${checkoutState.payment.toUpperCase()}`);
+  document.getElementById('wa-confirm-link').href=`https://wa.me/918777276476?text=${waMsg}`;
+  showToast('Order placed! 🎉');
+}
+
+// ═══════════════════════════════════════════════════════════
+//  MODAL HELPERS
+// ═══════════════════════════════════════════════════════════
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});
+});
+
+// ═══════════════════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════════════════
+let toastTimer;
+function showToast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.background=type==='error'?'#e53e3e':'var(--grove)';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PAGE NAVIGATION
+// ═══════════════════════════════════════════════════════════
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function showMainPage(){showPage('main-page');}
+function showAdminLogin(){showPage('admin-page');document.getElementById('admin-login-screen').style.display='flex';document.getElementById('admin-dashboard').style.display='none';}
+
+// ═══════════════════════════════════════════════════════════
+//  ADMIN
+// ═══════════════════════════════════════════════════════════
+const ADMIN_CREDS={user:'admin',pass:'nadeem2026'};
+
+function doAdminLogin(){
+  const u=document.getElementById('admin-user-input').value.trim();
+  const p=document.getElementById('admin-pass-input').value.trim();
+  if(u===ADMIN_CREDS.user&&p===ADMIN_CREDS.pass){
+    document.getElementById('admin-login-screen').style.display='none';
+    document.getElementById('admin-dashboard').style.display='block';
+    loadAdminDashboard();
+  } else {showToast('Wrong username or password','error');}
+}
+
+function adminLogout(){showAdminLogin();}
+
+function loadAdminDashboard(){
+  // Set date
+  document.getElementById('admin-date-sub').textContent='Today: '+new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  // Stats
+  const today=new Date().toDateString();
+  const todayOrders=orders.filter(o=>new Date(o.createdAt).toDateString()===today);
+  const totalRev=orders.reduce((s,o)=>s+o.total,0);
+  const todayRev=todayOrders.reduce((s,o)=>s+o.total,0);
+  const uniqueCustomers=new Set(orders.map(o=>o.phone)).size;
+  const pending=orders.filter(o=>o.status==='new').length;
+  document.getElementById('stat-total-orders').textContent=orders.length;
+  document.getElementById('stat-today-orders').textContent=todayOrders.length+' today';
+  document.getElementById('stat-total-revenue').textContent='₹'+totalRev;
+  document.getElementById('stat-today-revenue').textContent='₹'+todayRev+' today';
+  document.getElementById('stat-customers').textContent=uniqueCustomers;
+  document.getElementById('stat-pending').textContent=pending;
+  renderOrders();
+  renderAnalytics();
+  renderInventory();
+}
+
+function switchAdminTab(tab,el){
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.admin-tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+function renderOrders(){
+  const search=document.getElementById('order-search').value.toLowerCase();
+  const statusF=document.getElementById('order-status-filter').value;
+  const payF=document.getElementById('order-payment-filter').value;
+  let filtered=[...orders].reverse().filter(o=>{
+    const matchSearch=!search||(o.name.toLowerCase().includes(search)||o.phone.includes(search)||o.id.toLowerCase().includes(search));
+    const matchStatus=statusF==='all'||o.status===statusF;
+    const matchPay=payF==='all'||o.payment===payF;
+    return matchSearch&&matchStatus&&matchPay;
+  });
+  const tbody=document.getElementById('orders-tbody');
+  if(filtered.length===0){tbody.innerHTML='<tr><td colspan="8" class="no-orders">No orders found</td></tr>';return;}
+  tbody.innerHTML=filtered.map(o=>`
+    <tr>
+      <td><strong>#${o.id}</strong></td>
+      <td><strong>${o.name}</strong><br><span style="font-size:.76rem;color:#888">${o.phone}</span></td>
+      <td>
+        <div class="order-items-list">${o.items.slice(0,2).map(i=>`${i.e}${i.name}×${i.qty}`).join(', ')}${o.items.length>2?` +${o.items.length-2} more`:''}</div>
+        ${o.notes?'<div style="font-size:.72rem;color:var(--mango);margin-top:2px">📝 '+o.notes+'</div>':''}
+      </td>
+      <td><strong style="color:var(--grove)">₹${o.total}</strong><br><span style="font-size:.74rem;color:#999">${o.delivery==='delivery'?'🚴 Delivery':'🏪 Pickup'}</span></td>
+      <td style="font-size:.8rem;font-weight:600;text-transform:uppercase">${o.payment}</td>
+      <td>
+        <select class="status-select status-${o.status}" onchange="updateOrderStatus('${o.id}',this.value)" style="background:${statusColor(o.status)};border-radius:50px;padding:3px 8px;font-size:.72rem;font-weight:700">
+          <option value="new" ${o.status==='new'?'selected':''}>NEW</option>
+          <option value="confirmed" ${o.status==='confirmed'?'selected':''}>CONFIRMED</option>
+          <option value="delivered" ${o.status==='delivered'?'selected':''}>DELIVERED</option>
+          <option value="cancelled" ${o.status==='cancelled'?'selected':''}>CANCELLED</option>
+        </select>
+      </td>
+      <td style="font-size:.78rem;color:#888">${new Date(o.createdAt).toLocaleDateString('en-IN')}<br>${new Date(o.createdAt).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}</td>
+      <td>
+        <div class="order-actions">
+          <button class="action-btn action-wa" onclick="waOrder('${o.id}')">💬 WA</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+function statusColor(s){return{new:'#FFF3CD',confirmed:'#D1ECF1',delivered:'#D4EDDA',cancelled:'#F8D7DA'}[s]||'#eee';}
+
+function updateOrderStatus(id,status){
+  const o=orders.find(x=>x.id===id);
+  if(o){o.status=status;saveData('nfp_orders',orders);loadAdminDashboard();showToast('Order #'+id+' → '+status.toUpperCase());}
+}
+
+function waOrder(id){
+  const o=orders.find(x=>x.id===id);
+  if(!o)return;
+  const msg=encodeURIComponent(`Hi ${o.name}! Your order #${o.id} from Nadeem Fruit Paradise has been confirmed.\nItems: ${o.items.map(i=>`${i.e}${i.name} ×${i.qty}`).join(', ')}\nTotal: ₹${o.total}\nDelivery: ${o.delivery==='delivery'?'Home Delivery':'Pickup'}\nPayment: ${o.payment.toUpperCase()}\nThank you! 🍉`);
+  window.open(`https://wa.me/91${o.phone.replace(/\D/g,'')}?text=${msg}`,'_blank');
+}
+
+function renderAnalytics(){
+  // Revenue last 7 days
+  const days=[];
+  const maxRev=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toDateString();
+    const dayOrders=orders.filter(o=>new Date(o.createdAt).toDateString()===ds);
+    const rev=dayOrders.reduce((s,o)=>s+o.total,0);
+    days.push({label:d.toLocaleDateString('en-IN',{weekday:'short'}),rev});
+    maxRev.push(rev);
+  }
+  const max=Math.max(...maxRev,1);
+  document.getElementById('revenue-chart').innerHTML=days.map(d=>`
+    <div class="bar-wrap">
+      <div class="bar-val">₹${d.rev}</div>
+      <div class="bar" style="height:${Math.max((d.rev/max)*110,4)}px"></div>
+      <div class="bar-label">${d.label}</div>
+    </div>`).join('');
+
+  // Top fruits
+  const fruitSales={};
+  orders.forEach(o=>o.items.forEach(i=>{fruitSales[i.name]=(fruitSales[i.name]||{name:i.name,e:i.e,qty:0,rev:0});fruitSales[i.name].qty+=i.qty;fruitSales[i.name].rev+=i.price*i.qty;}));
+  const topFruits=Object.values(fruitSales).sort((a,b)=>b.rev-a.rev).slice(0,5);
+  document.getElementById('top-fruits-list').innerHTML=topFruits.length?topFruits.map((f,i)=>`
+    <div class="top-fruit-item">
+      <div class="top-fruit-rank">${i+1}</div>
+      <div class="top-fruit-emoji">${f.e}</div>
+      <div class="top-fruit-info"><div class="top-fruit-name">${f.name}</div><div class="top-fruit-qty">${f.qty} units sold</div></div>
+      <div class="top-fruit-revenue">₹${f.rev}</div>
+    </div>`).join(''):'<div style="text-align:center;color:#bbb;padding:20px;font-size:.88rem">No sales data yet</div>';
+
+  // Payment breakdown
+  const payCount={cod:0,upi:0,whatsapp:0};
+  orders.forEach(o=>payCount[o.payment]=(payCount[o.payment]||0)+1);
+  const total=orders.length||1;
+  document.getElementById('payment-breakdown').innerHTML=Object.entries({cod:'💵 Cash on Delivery',upi:'📱 UPI',whatsapp:'💚 WhatsApp Pay'}).map(([k,label])=>`
+    <div class="top-fruit-item">
+      <div style="flex:1"><div class="top-fruit-name" style="font-size:.85rem">${label}</div>
+        <div style="height:6px;background:#f0ece6;border-radius:6px;margin-top:6px;overflow:hidden">
+          <div style="height:100%;background:var(--mango);width:${(payCount[k]||0)/total*100}%;border-radius:6px;transition:.6s"></div>
+        </div>
+      </div>
+      <div style="font-weight:700;font-size:.9rem;color:var(--grove);margin-left:12px">${payCount[k]||0}</div>
+    </div>`).join('');
+}
+
+function renderInventory(){
+  const fruitSales={};
+  orders.forEach(o=>o.items.forEach(i=>{fruitSales[i.id]=(fruitSales[i.id]||0)+i.qty;}));
+  document.getElementById('inventory-tbody').innerHTML=FRUITS.map(f=>`
+    <tr>
+      <td><span style="font-size:1.4rem">${f.e}</span> <strong>${f.name}</strong><br><span style="font-size:.76rem;color:#999">${f.origin}</span></td>
+      <td><strong>₹${f.price}</strong> <span style="font-size:.76rem;color:#999">/${f.unit}</span></td>
+      <td style="text-transform:capitalize;font-size:.85rem">${f.cat}</td>
+      <td><span style="background:#D4EDDA;color:#155724;padding:3px 10px;border-radius:50px;font-size:.72rem;font-weight:700">IN STOCK</span></td>
+      <td><strong>${fruitSales[f.id]||0}</strong> sold</td>
+    </tr>`).join('');
+}
+</script>
+</body>
+</html>
